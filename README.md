@@ -136,29 +136,3 @@ Licensed under the [MIT License](LICENSE).
 ## 💬 About
 
 Created by **Plamen Nikolov** — developer tools enthusiast & Python practitioner.
-
-> Focused on helping teams build faster and test smarter.
-
----
-
-````
-
----
-
-### 🔧 What to do next
-
-1. Save this as `README.md` in your project root.  
-2. Replace `<your_username>` with your actual GitHub username in the badge URLs.  
-3. (Optional) Add a screenshot:  
-   - Run `pytest-enhanced report`  
-   - Take a screenshot of the CLI output  
-   - Add this line below “Example output”:  
-     ```markdown
-     ![CLI Report Screenshot](docs/screenshot.png)
-     ```
-4. Commit and push to GitHub — it’ll look beautiful right away.
-
----
-
-Would you like me to generate a matching **`LICENSE`**, **`tests.yml`** (GitHub Action for CI), and a **PyPI publish config** next — so you can upload it publicly and have badges work automatically?
-````
