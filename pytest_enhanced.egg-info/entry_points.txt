@@ -1,0 +1,5 @@
+[console_scripts]
+pytest-enhanced = pytest_enhanced.cli:app
+
+[pytest11]
+pytest-enhanced = pytest_enhanced.plugin

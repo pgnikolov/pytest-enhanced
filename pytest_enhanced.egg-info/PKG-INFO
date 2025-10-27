@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: pytest-enhanced
+Version: 0.1.0
+Summary: Pytest analytics: flaky tests, slow tests, historical pass rate.
+Author-email: Plamen <pgnikolov@gmail.com>
+License: MIT
+Keywords: pytest,testing,analytics,flaky,ci,qa
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pytest>=7.0
+Requires-Dist: typer>=0.12.0
+Requires-Dist: rich>=13.7.0
+Dynamic: license-file
+
+# pytest-enhanced
+Enhanced version of pytest
