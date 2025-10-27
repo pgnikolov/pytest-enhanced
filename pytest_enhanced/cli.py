@@ -1,3 +1,10 @@
+"""
+CLI interface for pytest-enhanced.
+
+Provides commands for reporting, flaky test detection,
+slow test analysis, and data export.
+"""
+
 from __future__ import annotations
 import typer, json, csv
 from pathlib import Path
@@ -14,6 +21,18 @@ console = Console()
 
 @app.command()
 def report():
+    """
+    Generates and displays a comprehensive report based on session statistics.
+
+    This command retrieves session statistics generated during pytest runs
+    executed with the `--enhanced` flag. If no test runs are available in the
+    current session, a message will be printed, and the program will exit with an
+    error status.
+
+    :raises typer.Exit: If no test runs are found, exits the command with a non-zero
+        status after printing an appropriate message.
+    :return: None
+    """
     stats = get_session_stats()
     if stats is None:
         console.print("[red]No test runs found.[/red] Run pytest with [bold]--enhanced[/bold].")
@@ -23,6 +42,20 @@ def report():
 
 @app.command()
 def flaky():
+    """
+    Displays a list of flaky tests with their statistics or a message indicating no
+    flaky tests were found. A test is considered flaky if it has failed at least twice
+    in the last 20 runs. Outputs results in a formatted table using the `rich`
+    library.
+
+    Raises an exit code using `typer.Exit` if no flaky tests are found.
+
+    :param flakes: List of tuples where each tuple contains the test name (str),
+        the number of failed runs (int), and the total runs (int). Derived from the
+        `get_flaky_tests` logic.
+    :raises typer.Exit: Exits the application with an appropriate message if no flaky
+        tests are found.
+    """
     flakes = get_flaky_tests()
     if not flakes:
         console.print("[green]No flaky tests found (>=2 fails in last 20 runs).[/green]")
@@ -43,6 +76,20 @@ def flaky():
 
 @app.command()
 def slow():
+    """
+    Prints the slowest tests recorded, if any, in a formatted table.
+
+    This function retrieves the slowest test records and displays them in a
+    styled table using the `rich` library. If no slow tests have been recorded,
+    an appropriate message is shown, and the program exits.
+
+    :param slows: List of tuples containing test name and duration of the
+                  slow tests. Retrieved from the `get_slowest_tests` function.
+
+    :raises typer.Exit: Raised when there are no slow tests recorded to exit
+                        gracefully after notifying the user.
+    :return: None
+    """
     slows = get_slowest_tests()
     if not slows:
         console.print("[yellow]No slow tests recorded.[/yellow]")
@@ -64,7 +111,20 @@ def export(
     output: Optional[Path] = typer.Option(None, "--output", "-o", help="Output file path"),
     limit: int = typer.Option(50, "--limit", "-l", help="Number of recent runs to include"),
 ):
-    """Export historical pytest analytics data in CSV or JSON format."""
+    """
+    Exports test results from a database in a specified format (csv or json).
+
+    This method retrieves a specific number of the most recent test runs and their
+    associated test data from the database, formats the data, and saves it to an
+    output file. If no output path is provided, a default filename with the
+    appropriate extension will be used.
+
+    :param format: The export format, either "csv" or "json".
+    :param output: The path to the output file where the results will be saved.
+                   If not provided, a default filename is used.
+    :param limit: The number of recent test runs to include in the export.
+    :return: None
+    """
     runs = fetch_all_runs(limit=limit)
     if not runs:
         typer.echo("No test runs found in database.")
