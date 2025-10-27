@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pytest-enhanced"
+version = "0.1.0"
+description = "Pytest analytics: flaky tests, slow tests, historical pass rate."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "Plamen", email = "pgnikolov@gmail.com" }
+]
+license = {text = "MIT"}
+keywords = ["pytest", "testing", "analytics", "flaky", "ci", "qa"]
+
+dependencies = [
+    "pytest>=7.0",
+    "typer>=0.12.0",
+    "rich>=13.7.0",
+]
+
+[project.scripts]
+pytest-enhanced = "pytest_enhanced.cli:app"
+
+[project.entry-points.pytest11]
+pytest-enhanced = "pytest_enhanced.plugin"
+
+[tool.setuptools]
+packages = ["pytest_enhanced"]
+
+[tool.setuptools.package-data]
+pytest_enhanced = ["py.typed"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
