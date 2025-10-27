@@ -181,9 +181,13 @@ View data in **Actions → Artifacts**.
 ## 🧩 Roadmap
 
 ✅ CSV / JSON export command
+
 ☑️ GitHub Action for CI analytics
+
 ⬜ FastAPI-based web dashboard
+
 ⬜ HTML reports (rich → static)
+
 ⬜ Slack / Teams notifications for flaky tests
 
 ---
