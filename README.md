@@ -119,13 +119,13 @@ Pass rate: 87.5%
 ---
 
 ## ⚙️ CLI Commands
-
 | Command                  | Description                            |
 | ------------------------ | -------------------------------------- |
 | `pytest-enhanced report` | Show full analytics for the latest run |
 | `pytest-enhanced slow`   | Display the slowest tests              |
 | `pytest-enhanced flaky`  | List flaky or unstable tests           |
 | `pytest-enhanced export` | Export results to CSV or JSON          |
+| `pytest-enhanced web`    | Start local FastAPI dashboard (beta)   |
 
 ---
 
@@ -149,6 +149,7 @@ Artifacts can be uploaded automatically in CI pipelines.
 
 ## 🗂️ Project Structure
 
+
 ```
 pytest-enhanced/
 ├── pytest_enhanced/
@@ -157,13 +158,24 @@ pytest-enhanced/
 │   ├── analysis.py        # metrics & stats
 │   ├── cli.py             # Typer CLI commands
 │   ├── report.py          # rich output formatting
+│   ├── web/               # FastAPI dashboard
 │   └── utils.py           # helpers
 ├── demo_tests/            # example test files
 └── tests/                 # internal tests
+
 ```
 
 ---
+## 🛠️ Built With
 
+* [Python 3.9+](https://www.python.org/)
+* [pytest](https://docs.pytest.org/)
+* [Typer](https://typer.tiangolo.com/)
+* [Rich](https://github.com/Textualize/rich)
+* [SQLite](https://www.sqlite.org/)
+* [FastAPI](https://fastapi.tiangolo.com/) *(dashboard coming soon)*
+
+---
 ## ⚙️ CI Integration
 
 ✅ Includes a workflow: `.github/workflows/pytest-enhanced.yml`
@@ -178,16 +190,33 @@ View data in **Actions → Artifacts**.
 
 ---
 
+## 💡 Who Uses It?
+
+* QA engineers tracking flaky tests
+* Developers improving CI reliability
+* TestOps engineers building dashboards
+* Anyone tired of “green == done” thinking
+
+---
+
+## 🧭 Development Setup
+
+```bash
+git clone https://github.com/pgnikolov/pytest-enhanced.git
+cd pytest-enhanced
+pip install -e ".[dev]"
+pytest --enhanced
+pytest-enhanced report
+```
+
+---
+
 ## 🧩 Roadmap
 
 ✅ CSV / JSON export command
-
-☑️ GitHub Action for CI analytics
-
-⬜ FastAPI-based web dashboard
-
+✅ GitHub Action for CI analytics
+☑️ FastAPI-based web dashboard
 ⬜ HTML reports (rich → static)
-
 ⬜ Slack / Teams notifications for flaky tests
 
 ---
