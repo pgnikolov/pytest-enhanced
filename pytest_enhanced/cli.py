@@ -14,6 +14,7 @@ from .analysis import get_session_stats, get_flaky_tests, get_slowest_tests
 from .report import render_full_report
 from .storage import fetch_all_runs, fetch_tests_for_run
 from .utils import format_duration
+from .web.server import run_server
 
 app = typer.Typer(help="pytest-enhanced: analyze pytest stability and performance")
 console = Console()
@@ -107,9 +108,9 @@ def slow():
 
 @app.command()
 def export(
-    format: str = typer.Option("csv", "--format", "-f", help="Export format: csv or json"),
-    output: Optional[Path] = typer.Option(None, "--output", "-o", help="Output file path"),
-    limit: int = typer.Option(50, "--limit", "-l", help="Number of recent runs to include"),
+        format: str = typer.Option("csv", "--format", "-f", help="Export format: csv or json"),
+        output: Optional[Path] = typer.Option(None, "--output", "-o", help="Output file path"),
+        limit: int = typer.Option(50, "--limit", "-l", help="Number of recent runs to include"),
 ):
     """
     Exports test results from a database in a specified format (csv or json).
@@ -163,3 +164,19 @@ def export(
         raise typer.Exit(1)
 
     typer.echo(f"✅ Exported {len(all_data)} test results to {output}")
+
+
+@app.command()
+def web(
+        host: str = typer.Option("127.0.0.1", help="Host to bind the web server."),
+        port: int = typer.Option(8000, help="Port for the web server.")
+):
+    """
+    Starts a web server with specified host and port options.
+
+    :param host: The host address to bind the web server, default is "127.0.0.1".
+    :param port: The port number for the web server, default is 8000.
+    :return: None
+    """
+    typer.echo(f"🌐 Starting web dashboard at http://{host}:{port}")
+    run_server(host=host, port=port)
