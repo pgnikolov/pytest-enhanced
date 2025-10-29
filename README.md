@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 > **Pytest Enhanced** — a smarter `pytest` companion that adds analytics, stability tracking,
-> and CLI reports for developers who want insights, not just pass/fail output.
+> and CLI + web reports for developers who want **insight, not just pass/fail output**.
 
 ---
 
@@ -19,10 +19,10 @@
 | Pass-rate history              | ✅ Yes             | ❌ No                |
 | Persistent history (SQLite)    | ✅ Yes             | ❌ No                |
 | CSV / JSON export              | ✅ Yes             | ❌ No                |
+| HTML static reports            | ✅ Yes             | ❌ No                |
+| Web dashboard (FastAPI)        | ✅ Beta            | ❌ No                |
 | Rich CLI reports               | ✅ Yes             | ❌ Plain text        |
 | CI-ready analytics             | ✅ Yes             | ⚪ Limited           |
-| HTML / dashboard (coming soon) | 🚧 Planned        | ❌ No                |
-
 > 🧠 *Built for developers who care about test reliability, not just test counts.*
 
 ---
@@ -49,6 +49,8 @@
 * 🎨 **Beautiful CLI reports**
 
   * Powered by [`rich`](https://github.com/Textualize/rich)
+* 🧾 **Static HTML reports**
+  * Generate sharable test reports with a single command 
 
 ---
 
@@ -125,8 +127,8 @@ Pass rate: 87.5%
 | `pytest-enhanced slow`   | Display the slowest tests              |
 | `pytest-enhanced flaky`  | List flaky or unstable tests           |
 | `pytest-enhanced export` | Export results to CSV or JSON          |
+| `pytest-enhanced html`   | Generate a static HTML report          |
 | `pytest-enhanced web`    | Start local FastAPI dashboard (beta)   |
-
 ---
 
 ## 📤 Exporting test data
@@ -144,6 +146,45 @@ pytest-enhanced export --format json --limit 100
 ```
 
 Artifacts can be uploaded automatically in CI pipelines.
+
+---
+
+## 🧾 HTML Reports
+
+Generate a static HTML report of your test analytics — ideal for CI artifacts or sharing with your team.
+
+```bash
+pytest-enhanced html --output report.html
+```
+
+Then open `report.html` in your browser.
+
+It includes:
+
+* test summary
+* slowest tests
+* flaky tests
+* pass rate history
+
+![img.png](img.png)
+---
+## ☁️ Web Dashboard (FastAPI)
+
+Launch a lightweight local dashboard to explore your pytest-enhanced data:
+
+```bash
+pytest-enhanced web
+```
+
+➡ Opens at **[http://127.0.0.1:8000](http://127.0.0.1:8000)**
+
+View:
+
+* historical runs
+* flaky test frequency
+* pass-rate trend over time
+
+🚧 *(Currently in beta, evolving towards interactive charts and filtering.)*
 
 ---
 
@@ -168,12 +209,12 @@ pytest-enhanced/
 ---
 ## 🛠️ Built With
 
-* [Python 3.9+](https://www.python.org/)
-* [pytest](https://docs.pytest.org/)
-* [Typer](https://typer.tiangolo.com/)
-* [Rich](https://github.com/Textualize/rich)
-* [SQLite](https://www.sqlite.org/)
-* [FastAPI](https://fastapi.tiangolo.com/) *(dashboard coming soon)*
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
+![pytest](https://img.shields.io/badge/pytest-Testing-orange?logo=pytest)
+![FastAPI](https://img.shields.io/badge/FastAPI-Web%20API-009688?logo=fastapi)
+![SQLite](https://img.shields.io/badge/SQLite-Storage-blue?logo=sqlite)
+![Rich](https://img.shields.io/badge/Rich-CLI%20Output-purple)
+![Typer](https://img.shields.io/badge/Typer-CLI%20Framework-teal)
 
 ---
 ## ⚙️ CI Integration
@@ -213,11 +254,13 @@ pytest-enhanced report
 
 ## 🧩 Roadmap
 
-✅ CSV / JSON export command
-✅ GitHub Action for CI analytics
-☑️ FastAPI-based web dashboard
-⬜ HTML reports (rich → static)
-⬜ Slack / Teams notifications for flaky tests
+* [x] CSV / JSON export command
+* [x] GitHub Action for CI analytics
+* [x] FastAPI-based web dashboard (beta)
+* [x] HTML reports (rich → static)
+* [ ] Slack / Teams notifications for flaky tests
+* [ ] GitHub badge with live pass-rate stats
+* [ ] Publish on PyPI
 
 ---
 
