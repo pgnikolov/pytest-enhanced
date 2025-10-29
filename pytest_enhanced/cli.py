@@ -180,3 +180,20 @@ def web(
     """
     typer.echo(f"🌐 Starting web dashboard at http://{host}:{port}")
     run_server(host=host, port=port)
+
+@app.command()
+def html(output: Optional[Path] = typer.Option(None, "--output", "-o", help="Output HTML file path")):
+    """
+    Generate an HTML report and optionally save it to the specified output file.
+
+    This command utilizes the ``export_html_report`` function from the
+    ``html_report`` module to generate the HTML report. If an output file
+    path is provided, the generated report will be saved to the specified
+    location.
+
+    :param output: Optional; Path to the output HTML file. If not provided,
+        the report will not be saved to a file.
+    :return: None
+    """
+    from .html_report import export_html_report
+    export_html_report(output)
