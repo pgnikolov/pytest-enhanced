@@ -258,8 +258,6 @@ pytest-enhanced report
 * [x] GitHub Action for CI analytics
 * [x] FastAPI-based web dashboard (beta)
 * [x] HTML reports (rich → static)
-* [ ] Slack / Teams notifications for flaky tests
-* [ ] GitHub badge with live pass-rate stats
 * [ ] Publish on PyPI
 
 ---
